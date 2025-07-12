@@ -1,7 +1,7 @@
 
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
-import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 import { Moon, Sun } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -28,6 +28,10 @@ const Layout = ({ children }: LayoutProps) => {
     }
   }, [isDark]);
 
+  const handleThemeToggle = (checked: boolean) => {
+    setIsDark(checked);
+  };
+
   return (
     <>
       <header className="h-14 border-b border-terminal-primary/30 bg-terminal-bg/95 backdrop-blur-sm sticky top-0 z-50">
@@ -39,14 +43,15 @@ const Layout = ({ children }: LayoutProps) => {
             </h1>
           </div>
           
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setIsDark(!isDark)}
-            className="text-terminal-primary hover:bg-terminal-primary/20"
-          >
-            {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-          </Button>
+          <div className="flex items-center gap-3">
+            <Sun className={`h-4 w-4 transition-colors ${isDark ? 'text-muted-foreground' : 'text-terminal-primary'}`} />
+            <Switch
+              checked={isDark}
+              onCheckedChange={handleThemeToggle}
+              className="data-[state=checked]:bg-terminal-primary data-[state=unchecked]:bg-input"
+            />
+            <Moon className={`h-4 w-4 transition-colors ${isDark ? 'text-terminal-primary' : 'text-muted-foreground'}`} />
+          </div>
         </div>
       </header>
 
