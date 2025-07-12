@@ -1,96 +1,50 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 216 27% 7%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 216 27% 9%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 216 27% 9%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 142 76% 36%;
+    --primary-foreground: 355 7% 97%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 216 27% 12%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 216 27% 12%;
+    --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 216 27% 12%;
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 216 27% 18%;
+    --input: 216 27% 18%;
+    --ring: 142 76% 36%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 216 27% 8%;
+    --sidebar-foreground: 210 40% 95%;
+    --sidebar-primary: 142 76% 36%;
+    --sidebar-primary-foreground: 355 7% 97%;
+    --sidebar-accent: 216 27% 12%;
+    --sidebar-accent-foreground: 210 40% 95%;
+    --sidebar-border: 216 27% 18%;
+    --sidebar-ring: 142 76% 36%;
   }
 }
 
@@ -100,6 +54,85 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-terminal-bg text-foreground font-mono;
+    background-image: 
+      radial-gradient(circle at 25% 25%, #00ff8833 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, #0099ff33 0%, transparent 50%);
+  }
+
+  .terminal-cursor::after {
+    content: '█';
+    @apply animate-pulse text-terminal-primary;
+  }
+
+  .terminal-input {
+    @apply bg-transparent border-terminal-primary/30 text-terminal-primary font-mono;
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 255, 136, 0.1) 50%, transparent 100%);
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  .terminal-button {
+    @apply bg-terminal-primary/20 border border-terminal-primary text-terminal-primary hover:bg-terminal-primary hover:text-black transition-all duration-300;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+  }
+
+  .terminal-button:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+    transform: translateY(-1px);
+  }
+
+  .status-up {
+    @apply text-terminal-primary;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+  }
+
+  .status-down {
+    @apply text-terminal-error;
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.8);
+  }
+
+  .log-error {
+    @apply text-terminal-error border-l-4 border-terminal-error bg-red-900/20;
+  }
+
+  .log-warn {
+    @apply text-terminal-warning border-l-4 border-terminal-warning bg-yellow-900/20;
+  }
+
+  .log-info {
+    @apply text-terminal-secondary border-l-4 border-terminal-secondary bg-blue-900/20;
+  }
+
+  .chart-glow {
+    filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.3));
+  }
+
+  .terminal-glow {
+    box-shadow: 
+      0 0 5px rgba(0, 255, 136, 0.2),
+      0 0 10px rgba(0, 255, 136, 0.1),
+      inset 0 0 20px rgba(0, 255, 136, 0.05);
+  }
+}
+
+.mouse-trail {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 136, 0.8) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 9999;
+  animation: fade-out 0.5s ease-out forwards;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.5);
   }
 }
