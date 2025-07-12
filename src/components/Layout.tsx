@@ -10,17 +10,16 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(() => {
+    // Initialize from localStorage or default to dark
+    const saved = localStorage.getItem('theme');
+    return saved ? saved === 'dark' : true;
+  });
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setIsDark(savedTheme === 'dark');
-    }
-  }, []);
-
-  useEffect(() => {
+    // Apply theme to document and save to localStorage
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    
     if (isDark) {
       document.documentElement.classList.add('dark');
     } else {
