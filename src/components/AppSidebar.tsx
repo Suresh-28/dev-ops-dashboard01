@@ -41,7 +41,7 @@ export function AppSidebar() {
       className={`${isCollapsed ? "w-14" : "w-64"} border-r border-terminal-primary/30 bg-sidebar terminal-glow transition-all duration-300`}
       collapsible="icon"
     >
-      <SidebarContent className="bg-transparent">
+      <SidebarContent className="bg-transparent pt-14">
         <SidebarGroup>
           <SidebarGroupLabel className="text-terminal-primary font-mono text-xs uppercase tracking-wider px-4 py-2">
             {!isCollapsed && "Navigation"}
