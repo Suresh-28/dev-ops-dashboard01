@@ -1,4 +1,5 @@
 
+
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -45,6 +46,14 @@
     --sidebar-accent-foreground: 210 40% 95%;
     --sidebar-border: 216 27% 18%;
     --sidebar-ring: 142 76% 36%;
+
+    /* Terminal colors for dark theme */
+    --terminal-bg: 15 23% 10%;
+    --terminal-primary: 142 76% 36%;
+    --terminal-secondary: 200 100% 50%;
+    --terminal-error: 0 100% 67%;
+    --terminal-warning: 45 100% 50%;
+    --terminal-muted: 215 16% 47%;
   }
 
   .light {
@@ -84,6 +93,14 @@
     --sidebar-accent-foreground: 222.2 84% 4.9%;
     --sidebar-border: 214.3 31.8% 91.4%;
     --sidebar-ring: 142 76% 36%;
+
+    /* Terminal colors for light theme */
+    --terminal-bg: 0 0% 98%;
+    --terminal-primary: 142 76% 30%;
+    --terminal-secondary: 200 100% 40%;
+    --terminal-error: 0 100% 50%;
+    --terminal-warning: 45 100% 45%;
+    --terminal-muted: 215 16% 40%;
   }
 }
 
@@ -110,56 +127,70 @@
 
   .terminal-cursor::after {
     content: '█';
-    @apply animate-pulse text-terminal-primary;
+    @apply animate-pulse;
+    color: hsl(var(--terminal-primary));
   }
 
   .terminal-input {
-    @apply bg-transparent border-terminal-primary/30 text-terminal-primary font-mono;
-    background: linear-gradient(90deg, transparent 0%, rgba(0, 255, 136, 0.1) 50%, transparent 100%);
+    @apply bg-transparent border-opacity-30 font-mono;
+    border-color: hsl(var(--terminal-primary));
+    color: hsl(var(--terminal-primary));
+    background: linear-gradient(90deg, transparent 0%, hsla(var(--terminal-primary), 0.1) 50%, transparent 100%);
     animation: glow 2s ease-in-out infinite alternate;
   }
 
   .terminal-button {
-    @apply bg-terminal-primary/20 border border-terminal-primary text-terminal-primary hover:bg-terminal-primary hover:text-black transition-all duration-300;
-    box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+    @apply border transition-all duration-300 font-mono;
+    background-color: hsla(var(--terminal-primary), 0.2);
+    border-color: hsl(var(--terminal-primary));
+    color: hsl(var(--terminal-primary));
+    box-shadow: 0 0 10px hsla(var(--terminal-primary), 0.3);
   }
 
   .terminal-button:hover {
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+    background-color: hsl(var(--terminal-primary));
+    color: hsl(var(--background));
+    box-shadow: 0 0 20px hsla(var(--terminal-primary), 0.6);
     transform: translateY(-1px);
   }
 
   .status-up {
-    @apply text-terminal-primary;
-    text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+    color: hsl(var(--terminal-primary));
+    text-shadow: 0 0 10px hsla(var(--terminal-primary), 0.8);
   }
 
   .status-down {
-    @apply text-terminal-error;
-    text-shadow: 0 0 10px rgba(255, 68, 68, 0.8);
+    color: hsl(var(--terminal-error));
+    text-shadow: 0 0 10px hsla(var(--terminal-error), 0.8);
   }
 
   .log-error {
-    @apply text-terminal-error border-l-4 border-terminal-error bg-red-900/20;
+    color: hsl(var(--terminal-error));
+    border-left: 4px solid hsl(var(--terminal-error));
+    background-color: hsla(var(--terminal-error), 0.1);
   }
 
   .log-warn {
-    @apply text-terminal-warning border-l-4 border-terminal-warning bg-yellow-900/20;
+    color: hsl(var(--terminal-warning));
+    border-left: 4px solid hsl(var(--terminal-warning));
+    background-color: hsla(var(--terminal-warning), 0.1);
   }
 
   .log-info {
-    @apply text-terminal-secondary border-l-4 border-terminal-secondary bg-blue-900/20;
+    color: hsl(var(--terminal-secondary));
+    border-left: 4px solid hsl(var(--terminal-secondary));
+    background-color: hsla(var(--terminal-secondary), 0.1);
   }
 
   .chart-glow {
-    filter: drop-shadow(0 0 10px rgba(0, 255, 136, 0.3));
+    filter: drop-shadow(0 0 10px hsla(var(--terminal-primary), 0.3));
   }
 
   .terminal-glow {
     box-shadow: 
-      0 0 5px rgba(0, 255, 136, 0.2),
-      0 0 10px rgba(0, 255, 136, 0.1),
-      inset 0 0 20px rgba(0, 255, 136, 0.05);
+      0 0 5px hsla(var(--terminal-primary), 0.2),
+      0 0 10px hsla(var(--terminal-primary), 0.1),
+      inset 0 0 20px hsla(var(--terminal-primary), 0.05);
   }
 }
 
@@ -168,7 +199,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 255, 136, 0.8) 0%, transparent 70%);
+  background: radial-gradient(circle, hsla(var(--terminal-primary), 0.8) 0%, transparent 70%);
   pointer-events: none;
   z-index: 9999;
   animation: fade-out 0.5s ease-out forwards;
@@ -182,5 +213,14 @@
   to {
     opacity: 0;
     transform: scale(0.5);
+  }
+}
+
+@keyframes glow {
+  0%, 100% { 
+    box-shadow: 0 0 5px hsl(var(--terminal-primary)), 0 0 10px hsl(var(--terminal-primary)), 0 0 15px hsl(var(--terminal-primary));
+  }
+  50% { 
+    box-shadow: 0 0 10px hsl(var(--terminal-primary)), 0 0 20px hsl(var(--terminal-primary)), 0 0 30px hsl(var(--terminal-primary));
   }
 }

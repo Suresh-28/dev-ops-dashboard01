@@ -1,4 +1,5 @@
 
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -64,12 +65,12 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				terminal: {
-					bg: '#0f111a',
-					primary: '#00ff88',
-					secondary: '#0099ff',
-					error: '#ff4444',
-					warning: '#ffaa00',
-					muted: '#6b7280'
+					bg: 'hsl(var(--terminal-bg))',
+					primary: 'hsl(var(--terminal-primary))',
+					secondary: 'hsl(var(--terminal-secondary))',
+					error: 'hsl(var(--terminal-error))',
+					warning: 'hsl(var(--terminal-warning))',
+					muted: 'hsl(var(--terminal-muted))'
 				}
 			},
 			fontFamily: {
@@ -99,10 +100,10 @@ export default {
 				},
 				glow: {
 					'0%, 100%': { 
-						boxShadow: '0 0 5px #00ff88, 0 0 10px #00ff88, 0 0 15px #00ff88' 
+						boxShadow: '0 0 5px hsl(var(--terminal-primary)), 0 0 10px hsl(var(--terminal-primary)), 0 0 15px hsl(var(--terminal-primary))' 
 					},
 					'50%': { 
-						boxShadow: '0 0 10px #00ff88, 0 0 20px #00ff88, 0 0 30px #00ff88' 
+						boxShadow: '0 0 10px hsl(var(--terminal-primary)), 0 0 20px hsl(var(--terminal-primary)), 0 0 30px hsl(var(--terminal-primary))' 
 					}
 				},
 				pulse: {
@@ -125,3 +126,4 @@ export default {
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
