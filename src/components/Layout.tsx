@@ -18,16 +18,20 @@ const Layout = ({ children }: LayoutProps) => {
 
   useEffect(() => {
     // Apply theme to document and save to localStorage
+    console.log('Theme changing to:', isDark ? 'dark' : 'light');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
     
     if (isDark) {
       document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
     } else {
+      document.documentElement.classList.add('light');
       document.documentElement.classList.remove('dark');
     }
   }, [isDark]);
 
   const handleThemeToggle = (checked: boolean) => {
+    console.log('Toggle clicked, setting to:', checked ? 'dark' : 'light');
     setIsDark(checked);
   };
 
